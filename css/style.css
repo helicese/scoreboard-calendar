@@ -1,0 +1,185 @@
+@font-face {
+  font-family: "Roboto-Light";
+  font-weight: 100;
+  src: url("./font/Roboto-Light.ttf") format("truetype"); }
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("./font/Roboto-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: "NotoSansHans-Medium";
+  src: url("./font/NotoSansHans-Medium.otf") format("truetype"); }
+@font-face {
+  font-family: "fzzkft";
+  src: url("./font/fzzkft.TTF") format("truetype"); }
+@-webkit-keyframes mid2 {
+  0% {
+    -webkit-transform: rotateX(0deg);
+    -webkit-transform-origin: 0% 100%; }
+  100% {
+    -webkit-transform: rotateX(-180deg);
+    -webkit-transform-origin: 0% 100%; } }
+@-webkit-keyframes mid1 {
+  0% {
+    -webkit-transform: rotateX(180deg);
+    -webkit-transform-origin: 0% 0%; }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    -webkit-transform-origin: 0% 0%; } }
+@-webkit-keyframes zoomIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1.5, 1.5); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1, 1); } }
+#calendar {
+  width: 460px;
+  height: 460px;
+  background-color: #000;
+  position: relative;
+  text-align: center;
+  perspective: 150px; }
+  #calendar .zoomIn {
+    -webkit-animation: zoomIn 1s; }
+  #calendar #lunarMonth {
+    font-family: "fzzkft";
+    font-size: 32px;
+    left: 158px;
+    letter-spacing: 2px; }
+  #calendar .month {
+    position: absolute;
+    top: 71px;
+    left: 152px;
+    width: 140px;
+    color: #fff;
+    padding-left: 7px;
+    line-height: 65%;
+    font-size: 31px;
+    font-family: 'Roboto-Light'; }
+  #calendar #lunarDate {
+    font-family: 'fzzkft';
+    font-size: 103px;
+    white-space: nowrap;
+    letter-spacing: 6px;
+    width: 225px;
+    height: 110px;
+    left: 124px;
+    top: 110px; }
+  #calendar .date {
+    position: absolute;
+    top: 118px;
+    left: 153px;
+    width: 200px;
+    color: #fff;
+    height: 110px;
+    width: 150px;
+    line-height: 110px;
+    font-size: 136px;
+    font-family: 'Roboto-Regular';
+    overflow-x: visible; }
+    #calendar .date .up {
+      height: 50%;
+      overflow: hidden;
+      position: relative;
+      top: 0%;
+      background-color: #000;
+      z-index: 1; }
+    #calendar .date .mid1 {
+      height: 50%;
+      overflow: hidden;
+      position: relative;
+      top: 0%;
+      background-color: #000;
+      z-index: 2;
+      -webkit-animation: mid1 0s;
+      -webkit-animation-duration: 0.2s;
+      -webkit-backface-visibility: hidden;
+      transform: rotateX(180deg); }
+      #calendar .date .mid1 span {
+        bottom: 0;
+        left: 0;
+        position: absolute; }
+    #calendar .date .mid2 {
+      height: 50%;
+      overflow: hidden;
+      position: relative;
+      top: -100%;
+      background-color: #000;
+      z-index: 3;
+      -webkit-animation: mid2 0s;
+      -webkit-animation-duration: 0.2s;
+      -webkit-backface-visibility: hidden; }
+    #calendar .date .down {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      top: -150%;
+      background-color: #000;
+      z-index: -1; }
+  #calendar #lunarDay {
+    font-family: 'fzzkft';
+    font-size: 32px;
+    letter-spacing: 2px;
+    top: 214px;
+    left: 168px;
+    z-index: 5; }
+  #calendar .day {
+    position: absolute;
+    top: 234px;
+    left: 160px;
+    width: 140px;
+    color: #fff;
+    height: 38px;
+    font-size: 28px;
+    font-family: 'NotoSansHans-Medium';
+    letter-spacing: 15px;
+    background-color: #2fb0ff;
+    border-radius: 18px; }
+    #calendar .day span {
+      display: block;
+      position: absolute;
+      text-align: center;
+      transform: translate(13px, -3px); }
+  #calendar .last {
+    position: absolute;
+    top: 299px;
+    left: 160px;
+    width: 140px;
+    color: #fff; }
+    #calendar .last .last1 {
+      opacity: 0;
+      position: absolute;
+      top: -25px;
+      left: 5px;
+      width: 140px;
+      color: #fff;
+      font-family: 'fzzkft'; }
+      #calendar .last .last1 .lunarYear {
+        font-size: 89px;
+        position: absolute;
+        left: 14px; }
+      #calendar .last .last1 .lunarYear2 {
+        font-size: 26px;
+        position: absolute;
+        top: 61px;
+        left: 104px; }
+      #calendar .last .last1 .lunarYear3 {
+        font-size: 32px;
+        letter-spacing: 2px;
+        position: absolute;
+        top: 91px;
+        left: 14px; }
+    #calendar .last .last2 {
+      position: absolute;
+      top: 12px;
+      left: -18px;
+      width: 140px;
+      color: #fff; }
+      #calendar .last .last2 .lunarDay {
+        margin-left: -162px;
+        width: 500px;
+        font-family: 'Roboto-Regular';
+        font-size: 86px;
+        color: #fff; }
+
+/*# sourceMappingURL=style.css.map */
