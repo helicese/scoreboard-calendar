@@ -40,9 +40,15 @@ var calendar = function () {
     //set variables and some initial values
     this.dates = document.getElementsByClassName('calendar-number');
     this.texts = document.getElementsByClassName('calendar-text');
-    this.roundTime = 0.2;
+    this.roundTime = 3;
     this.toggleLunar = 1;
     this.dom.root.style.opacity = 0;
+
+    this.dom.rotateBoard1.style.webkitTransform = 'rotateX(180deg)';
+    this.dom.rotateBoard2.style.webkitTransform = 'rotateX(0deg)';
+    // this.dom.rotateBoard1.classList.add('mid1');
+    // this.dom.rotateBoard2.classList.add('mid2');
+
 }
 
 /*
@@ -50,10 +56,10 @@ var calendar = function () {
  */
 calendar.prototype.__initShow = function() {
     var self = this;
-    self.roundTime = 0.2;
-    self.dom.rotateBoard1.style.webkitAnimationDuration = self.roundTime+'s';
-    self.dom.rotateBoard2.style.webkitAnimationDuration = self.roundTime+'s';
-    if(self.dom.rotateBoard1.classList[1] === 'mid1') {
+    self.roundTime = 0.3;
+    self.dom.rotateBoard1.style.webkitTransitionDuration = self.roundTime+'s';
+    self.dom.rotateBoard2.style.webkitTransitionDuration = self.roundTime+'s';
+    if(self.dom.rotateBoard1.style.webkitTransition) {
         console.log('click again');
         self.__animationToggle(0);
         self.dom.rotateBoard1.offsetWidth = self.dom.rotateBoard1.offsetWidth;
@@ -99,24 +105,39 @@ calendar.prototype.__updateUI = function(data) {
     //down
     this.texts[5].innerHTML = 'hello world';
 };
-
 calendar.prototype.__animationToggle = function (check) {
     var self = this;
     if(check) {
+        scene.dom.down.style.zIndex = -1;
         self.dom.cMonth.classList.add('zoomIn');
         self.dom.cDate.classList.add('zoomIn');
         self.dom.cDay.classList.add('zoomIn');
         self.dom.cLast.classList.add('zoomIn');
-        self.dom.rotateBoard1.classList.add('mid1');
-        self.dom.rotateBoard2.classList.add('mid2');
+        // self.dom.rotateBoard1.classList.add('mid1');
+        // self.dom.rotateBoard2.classList.add('mid2');
+        // self.dom.rotateBoard1.style.webkitTransform = 'rotateX(180deg)';
+        self.dom.rotateBoard1.style.webkitTransition = '-webkit-transform 0.1s';
+        self.dom.rotateBoard2.style.webkitTransition = '-webkit-transform 0.1s';
+        // setTimeout(function(){
+                self.dom.rotateBoard1.style.webkitTransform = 'rotateX(0deg)';
+                self.dom.rotateBoard2.style.webkitTransform = 'rotateX(-180deg)';
+        // }, 0);
+        // self.dom.rotateBoard1.style.webkitTransform = 'rotateX(0deg)';
 
+        // self.dom.rotateBoard2.classList.add('mid2');
+        // self.dom.rotateBoard2.style.webkitTransition = '-webkit-transform 2s';
+        // self.dom.rotateBoard2.style.webkitTransform = 'rotateX(-180deg)';
     } else {
         self.dom.cMonth.classList.remove('zoomIn');
         self.dom.cDate.classList.remove('zoomIn');
         self.dom.cDay.classList.remove('zoomIn');
         self.dom.cLast.classList.remove('zoomIn');
-        self.dom.rotateBoard1.classList.remove('mid1');
-        self.dom.rotateBoard2.classList.remove('mid2');
+        self.dom.rotateBoard1.style.webkitTransition = '';
+        self.dom.rotateBoard2.style.webkitTransition = '';
+        self.dom.rotateBoard1.style.webkitTransform = 'rotateX(180deg)';
+        self.dom.rotateBoard2.style.webkitTransform = 'rotateX(0deg)';
+        // self.dom.rotateBoard1.classList.remove('mid1');
+        // self.dom.rotateBoard2.classList.remove('mid2');
 
     }
 
@@ -130,7 +151,7 @@ calendar.prototype.show = function(argu) {
     self.__initShow();
     self.dom.root.style.opacity = 1;
     self.__animationToggle(1);
-    self.dom.rotateBoard1.addEventListener('webkitAnimationEnd', handler, false);
+    self.dom.rotateBoard1.addEventListener('webkitTransitionEnd', handler, false);
 };
 
 /*
@@ -139,7 +160,7 @@ calendar.prototype.show = function(argu) {
 calendar.prototype.hide = function(argu) {
     var self = this;
     console.log(self);
-    self.roundTime = 0.2;
+    self.roundTime = 3;
     self.dom.rotateBoard1.style.webkitAnimationDuration = self.roundTime+'s';
     self.dom.rotateBoard2.style.webkitAnimationDuration = self.roundTime+'s';
     self.dom.root.style.webkitTransition = 'opacity 0.5s ease-out';
@@ -148,7 +169,7 @@ calendar.prototype.hide = function(argu) {
         self.__animationToggle(0);
     }, 500);
 
-    self.dom.rotateBoard1.removeEventListener('webkitAnimationEnd', handler, false);
+    self.dom.rotateBoard1.removeEventListener('webkitTransitonEnd', handler, false);
 };
 
 //lunar function, left to do
@@ -182,23 +203,29 @@ calendar.prototype.hide = function(argu) {
 
 
 var handler = function () {
+    console.log('handler');
     for (var i = 0; i < scene.dates.length; i++) {
         scene.dates[i].innerHTML = formatNumber(parseInt(scene.dates[i].innerHTML) + 1);
     }
     // roundTime = 0.2;
-    scene.dom.rotateBoard1.style.webkitAnimationDuration = scene.roundTime+'s';
-    scene.dom.rotateBoard2.style.webkitAnimationDuration = scene.roundTime+'s';
+    scene.dom.rotateBoard1.style.webkitTransitionDuration = scene.roundTime+'s';
+    scene.dom.rotateBoard2.style.webkitTransitionDuration = scene.roundTime+'s';
     //时间递增函数
     scene.roundTime *= 1.4;
     console.log(scene.roundTime);
-    if (scene.roundTime < 1.0) {
-        scene.dom.rotateBoard1.classList.remove('mid1');
-        scene.dom.rotateBoard2.classList.remove('mid2');
-        scene.dom.rotateBoard1.offsetWidth = scene.dom.rotateBoard1.offsetWidth;
-        scene.dom.rotateBoard1.style.webkitAnimationDuration = scene.roundTime+'s';
-        scene.dom.rotateBoard2.style.webkitAnimationDuration = scene.roundTime+'s';
-        scene.dom.rotateBoard1.classList.add('mid1');
-        scene.dom.rotateBoard2.classList.add('mid2');
+    if (scene.roundTime < 1.2) {
+        scene.dom.rotateBoard1.style.webkitTransition = '';
+        scene.dom.rotateBoard2.style.webkitTransition = '';
+        scene.dom.rotateBoard1.style.webkitTransform = 'rotateX(180deg)';
+        scene.dom.rotateBoard2.style.webkitTransform = 'rotateX(0deg)';
+        setTimeout(function(){
+            scene.dom.rotateBoard1.style.webkitTransition = '-webkit-transform ' + scene.roundTime + 's';
+            scene.dom.rotateBoard2.style.webkitTransition = '-webkit-transform ' + scene.roundTime + 's';
+            scene.dom.rotateBoard1.style.webkitTransform = 'rotateX(0deg)';
+            scene.dom.rotateBoard2.style.webkitTransform = 'rotateX(-180deg)';
+        },0);
+    } else {
+        scene.dom.down.style.zIndex = 5;
     }
 }
 

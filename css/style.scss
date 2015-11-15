@@ -19,11 +19,11 @@
   src : url('./font/fzzkft.TTF') format('truetype');
 }
 
-@mixin boardAnimation ($name: mymove, $time: 1s, $delay: 0) {
-    -webkit-animation: $name  $delay;
-    -webkit-animation-duration: $time ;
-    -webkit-backface-visibility: hidden;
-}
+// @mixin boardAnimation ($name: mymove, $time: 1s, $delay: 0) {
+//     -webkit-animation: $name  $delay;
+//     -webkit-animation-duration: $time ;
+//     -webkit-backface-visibility: hidden;
+// }
 @mixin keyFrame ($angle: 0deg, $originY: 0%) {
     -webkit-transform: rotateX($angle);
     -webkit-transform-origin: 0% $originY;
@@ -42,6 +42,7 @@
     top: $top;
     background-color: #000;
     z-index: $depth;
+    -webkit-backface-visibility: hidden;
 }
 
 @-webkit-keyframes mid2 {
@@ -69,7 +70,7 @@
     background-color: #000;
     position: relative;
     text-align: center;
-    perspective: 150px;
+    perspective: 200px;
     .zoomIn {
         -webkit-animation: zoomIn 1s;
     }
@@ -100,26 +101,25 @@
         @include initPos(118px, 153px, 200px);
         height: 110px;
         width: 150px;
-        line-height: 110px;;
+        line-height: 110px;
         font-size: 136px;
         font-family: 'Roboto-Regular';
         overflow-x: visible;
         .up {
             @include board(50%, 0%, 1);
         }
-        .mid1 {
+        .rotateBoard1 {
             @include board(50%, 0%, 2);
-            @include boardAnimation(mid1, 0.2s, 0s);
-            transform: rotateX(180deg);
+            -webkit-transform-origin: 0% 0%;
             span {
                 bottom:0;
                 left:0;
                 position: absolute;
             }
         }
-        .mid2 {
+        .rotateBoard2 {
             @include board(50%, -100%, 3);
-            @include boardAnimation(mid2, 0.2s, 0s);
+            -webkit-transform-origin: 0% 100%;
         }
         .down {
             @include board(100%, -150%, -1);
@@ -187,4 +187,15 @@
         }
     }
 
+}
+
+
+.test {
+    width: 100px;
+    height: 100px;
+    background-color: #f00;
+    -webkit-transition: background-color 1s;
+}
+.test:hover {
+    background-color: #0f0;
 }

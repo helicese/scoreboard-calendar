@@ -38,7 +38,7 @@
   background-color: #000;
   position: relative;
   text-align: center;
-  perspective: 150px; }
+  perspective: 200px; }
   #calendar .zoomIn {
     -webkit-animation: zoomIn 1s; }
   #calendar #lunarMonth {
@@ -83,39 +83,38 @@
       position: relative;
       top: 0%;
       background-color: #000;
-      z-index: 1; }
-    #calendar .date .mid1 {
+      z-index: 1;
+      -webkit-backface-visibility: hidden; }
+    #calendar .date .rotateBoard1 {
       height: 50%;
       overflow: hidden;
       position: relative;
       top: 0%;
       background-color: #000;
       z-index: 2;
-      -webkit-animation: mid1 0s;
-      -webkit-animation-duration: 0.2s;
       -webkit-backface-visibility: hidden;
-      transform: rotateX(180deg); }
-      #calendar .date .mid1 span {
+      -webkit-transform-origin: 0% 0%; }
+      #calendar .date .rotateBoard1 span {
         bottom: 0;
         left: 0;
         position: absolute; }
-    #calendar .date .mid2 {
+    #calendar .date .rotateBoard2 {
       height: 50%;
       overflow: hidden;
       position: relative;
       top: -100%;
       background-color: #000;
       z-index: 3;
-      -webkit-animation: mid2 0s;
-      -webkit-animation-duration: 0.2s;
-      -webkit-backface-visibility: hidden; }
+      -webkit-backface-visibility: hidden;
+      -webkit-transform-origin: 0% 100%; }
     #calendar .date .down {
       height: 100%;
       overflow: hidden;
       position: relative;
       top: -150%;
       background-color: #000;
-      z-index: -1; }
+      z-index: -1;
+      -webkit-backface-visibility: hidden; }
   #calendar #lunarDay {
     font-family: 'fzzkft';
     font-size: 32px;
@@ -181,5 +180,14 @@
         font-family: 'Roboto-Regular';
         font-size: 86px;
         color: #fff; }
+
+.test {
+  width: 100px;
+  height: 100px;
+  background-color: #f00;
+  -webkit-transition: background-color 1s; }
+
+.test:hover {
+  background-color: #0f0; }
 
 /*# sourceMappingURL=style.css.map */
